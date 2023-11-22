@@ -1,10 +1,14 @@
 package views;
 
+import DAO.pontoColetaDAO;
+import ecoleta.Main;
+import entity.CollectPoint;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import org.jxmapviewer.JXMapKit;
 import org.jxmapviewer.viewer.DefaultWaypoint;
 import org.jxmapviewer.viewer.GeoPosition;
@@ -14,13 +18,13 @@ import org.jxmapviewer.viewer.WaypointPainter;
 public class CreateCollectPoint extends javax.swing.JFrame {
 
     private GeoPosition geoPositionSelected;
-    
+
     public CreateCollectPoint() {
         initComponents();
         this.setLocationRelativeTo(null);
         initMap();
     }
-    
+
     private void initMap() {
         JXMapKit mapKit = new JXMapKit();
         mapKit.setDefaultProvider(JXMapKit.DefaultProviders.OpenStreetMaps);
@@ -47,6 +51,7 @@ public class CreateCollectPoint extends javax.swing.JFrame {
         this.panelMap.setLayout(new BorderLayout());
         this.panelMap.add(mapKit);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -221,13 +226,31 @@ public class CreateCollectPoint extends javax.swing.JFrame {
     }//GEN-LAST:event_goBackButtonMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         String name = this.localName.getText();
         String email = this.localEmail.getText();
-        String phone = this.localCity.getText();
+        String city = this.localCity.getText();
         String typeOfWaste = (String) this.localTypeOfWaste.getSelectedItem();
         Double latitute = this.geoPositionSelected.getLatitude();
         Double longitude = this.geoPositionSelected.getLongitude();
-        
+
+        CollectPoint ponto = new CollectPoint(name, email, city, typeOfWaste, latitute, longitude);
+        Main.nomeGlobal = ponto.getNome();
+
+        if (Main.nomeGlobal.equals(pontoColetaDAO.buscarNome(name))) {
+            JOptionPane.showMessageDialog(null, "nome ja cadastrado no banco");
+            return;
+        }
+
+        pontoColetaDAO.pontoColetaDAO(ponto);
+
+        this.localName.setText("");
+        this.localEmail.setText("");
+        this.localCity.setText("");
+        this.localTypeOfWaste.getSelectedItem();
+        this.geoPositionSelected.getLatitude();
+        this.geoPositionSelected.getLongitude();
+
         // CADASTRAR NO BANCO DE DADOS
     }//GEN-LAST:event_jButton1ActionPerformed
 

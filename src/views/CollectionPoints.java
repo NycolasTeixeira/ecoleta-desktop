@@ -1,5 +1,6 @@
 package views;
 
+import DAO.pontoColetaDAO;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,14 +19,13 @@ public class CollectionPoints extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.title.setText("Ponto de coleta em: " + city);
         loadCollectionPointsOfCity();
+        
     }
 
     private void loadCollectionPointsOfCity() {
-        ArrayList<CollectPoint> points = new ArrayList<>(); // REMOVER O NEW ARRAYLIST<>() E SUBSTITUIR PELA CHAMADA NO BANCO
-        points.add(new CollectPoint(-27.237536666590675, -48.62617492675781)); // REMOVER
-        points.add(new CollectPoint(-26.237536666590675, -48.62617492675781)); // REMOVER
-        points.add(new CollectPoint(-28.237536666590675, -48.62617492675781)); // REMOVER
-        drawMap(points);
+          pontoColetaDAO.buscarPontos(city);
+      
+        drawMap(pontos);
     }
 
     private void drawMap(ArrayList<CollectPoint> points) {

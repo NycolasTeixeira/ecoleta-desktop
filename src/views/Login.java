@@ -27,6 +27,11 @@ public class Login extends javax.swing.JFrame {
 
         tfdCity.setToolTipText("Cidade");
         tfdCity.setBorder(null);
+        tfdCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdCityActionPerformed(evt);
+            }
+        });
 
         searchCollectionPoints.setFont(new java.awt.Font("Fira Sans", 1, 18)); // NOI18N
         searchCollectionPoints.setText("BUSCAR");
@@ -120,6 +125,10 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
         new CreateCollectPoint().setVisible(true);
     }//GEN-LAST:event_createCollectPointButtonActionPerformed
+
+    private void tfdCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdCityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdCityActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createCollectPointButton;
